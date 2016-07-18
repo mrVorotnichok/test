@@ -1,0 +1,81 @@
+.__pullRight
+	float: right !important
+
+.__pullLeft
+	float: right !important
+
+.__invisible
+	visibility: hidden !important
+
+.__hidden
+	display: none !important
+
+.__clear
+	clear: both !important
+
+.__textRight
+	text-align: right !important
+
+.__textLeft
+	text-align: left !important
+
+.__textCenter
+	text-align: center !important
+
+.__textJustify
+	text-align: justify !important
+
+.__textNoWrap
+	white-space: nowrap !important
+
+.__textLowerCase
+	text-transform: lowercase !important
+
+.__textUpperCase
+	text-transform: uppercase !important
+
+.__textCapitalize
+	text-transform: capitalize !important
+
+.__flexWrap
+	flex-wrap: wrap !important
+
+.__flexNoWrap
+	flex-wrap: nowrap !important
+
+// Обрезает юниты (размерность) у числа
+@function stripUnits($_number)
+	@return $_number / ($_number * 0 + 1)
+
+// Возвращает среднее значение между двумя
+// $_number1 - первое значение
+// $_number2 - второе значение
+// $_offset - смещение среднего значения от первого (от 0 до 1)
+@function getMean($_number1, $_number2, $_offset:0.5)
+	$_normalizedOffset: 0.5
+	@if unit($_offset) == %
+		$_normalizedOffset: stripUnits($_offset)/100
+	@else if unitless($_offset)
+		$_normalizedOffset: $_offset
+	@else
+		$_normalizedOffset: stripUnits($_offset)
+	@return round($_number1 + ($_number2 - $_number1) * $_normalizedOffset)
+
+// Откругляет число до заданного знака после запятой
+// $_number - число
+// $_digits - кол-во знаков после запятой
+// $_mode - метод округления (round, ceil, floor)
+@function decimalRound($_number, $_digits: 0, $_mode: round)
+	$_n: 1
+	@if $_digits > 0
+		@for $_i from 1 through $_digits
+			$_n: $_n * 10
+	@if $_mode == round
+		@return round($_number * $_n) / $_n
+	@else if $_mode == ceil
+		@return ceil($_number * $_n) / $_n
+	@else if $_mode == floor
+		@return floor($_number * $_n) / $_n
+	@else
+		@warn 'Режима "#{$_mode}" не нашлось'
+		@return $_number
