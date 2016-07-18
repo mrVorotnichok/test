@@ -1,8 +1,57 @@
 .mediaBlock
 	display: flex
-	width: 33.333%
+	flex-wrap: wrap
+	flex-direction: column
+
+	&-imageWrapper
+	  width: 100%
+	  flex-grow: 0
+	  border: 1px solid #4DACDD
+	  flex-shrink: 0
+	  margin-bottom: 10px
+
+	  &:hover
+	  	opacity: 0.9
+
+	&-content
+	  border-bottom: 1px solid #dddddd
+	  font-family: "PT Sans Narrow"
+	  font-size: 18px
+	  color: #0F394F
+
+	  &:hover
+  		color: #1FA1D4
+	  
+	&-date
+	  color: #C1C1C1
 
 	&-title
-		font-size: 24px
-		font-family: 'PT Sans Narrow'
+	  margin-bottom: 5px
+	  display: flex
+	  justify-content: space-between
+	  align-items: flex-end
+	  
+	  a
+	  	text-decoration: none
+	  	font-size: 20px
+	  	font-family: "PT Sans Narrow Bold"
+	  	color: #1F77A5
 
+	  &:hover
+		   color:  darken(#0F394F, 3)
+
+
+	&-image
+	  padding-bottom: 72%
+	  background-size: cover
+	  background-repeat: no-repeat
+	  display: block
+	  text-decoration: none
+	  position: relative
+
+	&-description
+	  margin-bottom: 20px
+
+
+	@media all and (max-width: getBreakpointVal(sm, maxWidth))
+	  width: 100%
